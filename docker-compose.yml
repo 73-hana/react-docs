@@ -8,3 +8,4 @@ services:
     ports:
       - "3000:3000" # ホストポート:コンテナポート
     tty: true # コンテナが勝手に終了しないための設定
+    stdin_open: true
