@@ -7,4 +7,4 @@ services:
     command: sh -c "npm start" # コンテナ実行のタイミングでreactも実行
     ports:
       - "3000:3000" # ホストポート:コンテナポート
-    tty: ture # コンテナが勝手に終了しないための設定
+    tty: true # コンテナが勝手に終了しないための設定
