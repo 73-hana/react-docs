@@ -3,7 +3,7 @@ services:
   react-tutorials:
     build: . #ビルドするDockerfileの位置を指定
     volumes:
-      - ./reactApp:/var/www/html/reactApp # ホストパス:コンテナパス
+      - ./react-app:/var/www/html/react-app # ホストパス:コンテナパス
     command: sh -c "npm start" # コンテナ実行のタイミングでreactも実行
     ports:
       - "3000:3000" # ホストポート:コンテナポート
