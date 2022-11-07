@@ -49,4 +49,13 @@ return React.createElement('div', {className: 'foo'}, React.createElement('h1', 
 ```
 
 *```React.createELement()```でHTML構造を作ったらものすごい時間がかかるな*
+
 *それくらいならHTMLをHTML（に似たもの）で直感的に書けるJSXを使った方がいい*
+
+JSXではJSの力を十分に発揮できる
+
+React要素はJavaScriptのオブジェクトであるため、JSXではHTMLに似た記法を保持したままJavaScriptの全ての機能を活用できる
+
+Reactのコンポーネントはカプセル化されており、それぞれから独立して動作する
+
+これにより、単純なコンポーネントを活用して複雑なUIを作成することが可能になる
