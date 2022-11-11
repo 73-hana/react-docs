@@ -6,4 +6,23 @@
 
 そのため、squaresの過去のバージョンをすべて保存しておけば、過去の手番をさかのぼることができる
 
-過去の```squares```の配列を、```history```という別の配列
+```history```stateをGameコンポーネント内に置くことで、```squares```stateをBoardコンポーネントから取り除くことができる（```history```は```squares```を包含しているから）
+
+リフトアップを行う
+
+```jsx
+class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      history: [{
+        squares: Array(9).fill(null),
+      }],
+      xIsNext: true,
+    }
+  }
+
+  render() {
+    ...
+  }
+}
