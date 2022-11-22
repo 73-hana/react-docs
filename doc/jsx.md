@@ -52,3 +52,46 @@ const elements = (
 const root = ReactDOM.createRoot(document.getElementById("jsx01"));
 root.render(elements);
 ```
+
+---
+
+## JSX もまた式である
+
+JSX がコンパイルされた後、JSX の式は通常の JavaScript の関数呼び出しに変換され、JavaScript オブジェクトへと出力される
+
+つまり、JSX を`if`文や`for`文の中で使用したり、変数に入力したり、引数として受け取ったりすることが可能であるということである
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+
+const user = "Jonh Doe";
+
+function getGreeting(user) {
+  if (user) {
+    return <p>Hello {user}</p>;
+  } else {
+    return <p>Who are you?</p>;
+  }
+}
+
+const booksCart = ["book1 - basic", "book2 - advanced", "book3 - superhard"];
+
+function listupBooks(arr) {
+  let bookList = [];
+  for (let i = 0; i < arr.length; i++) {
+    bookList.push(<li>{arr[i]}</li>);
+  }
+  return <ul>{bookList}</ul>;
+}
+
+const output = (
+  <>
+    <div>{getGreeting(user)}</div>
+    <div>{listupBooks(booksCart)}</div>
+  </>
+);
+
+const root = ReactDOM.createRoot(document.getElementById("jsx02"));
+root.render(output);
+```
