@@ -122,3 +122,55 @@ root.render(
 ```
 
 ---
+
+## JSX で子要素を指定する
+
+タグが空の場合、XML のように`/>`で閉じることができる
+
+JSX のタグは子要素を持つことができる
+
+---
+
+## JSX はインジェクション攻撃を防ぐ
+
+ReactDOM は、JSX に埋め込まれた値をレンダー前にエスケープするされ、全てが文字列に変換される
+
+このため、自分のアプリケーションで明示的に書かれたものではないあらゆるコードは、注入できない
+
+---
+
+## JSX はオブジェクトの表現である
+
+Babel は JSX を`React.createElement()`の呼び出しに変換（コンパイル）する
+
+```jsx
+const element = <h1 className="greeting">Hello, World!</h1>;
+```
+
+これは以下のように変換（コンパイル）される
+
+```jsx
+const element = React.createElement(
+  "h1",
+  { className: "greeting" },
+  "Hello, World!"
+);
+```
+
+そして、上記コードは本質的には以下のようなオブジェクトが生成される
+
+```jsx
+const element = {
+  type: "h1",
+  props: {
+    className: "greeting",
+    children: "Hello, World!",
+  },
+};
+```
+
+このオブジェクトは React 要素と呼ばれるものである
+
+React 要素は画面に表示したいものの説明書きとして考えることができる
+
+---
