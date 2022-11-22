@@ -95,3 +95,30 @@ const output = (
 const root = ReactDOM.createRoot(document.getElementById("jsx02"));
 root.render(output);
 ```
+
+---
+
+## JSX で属性を指定する
+
+文字リテラルを属性として指定するため引用符を使用する
+
+しかし、属性に JavaScript 式を埋め込む場合は、中括弧をさらに引用符で囲まない
+
+文字の場合は引用符を用いて、式の場合は中括弧を用いるようにし、両方を使用することはない
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+
+const attrObj = {
+  className: "sapmleImage",
+  src: "sample/image/xxx.png",
+};
+
+const root = ReactDOM.createRoot(document.getElementById("jsx03"));
+root.render(
+  <img className={attrObj.className} src={attrObj.src} alt="sample image" />
+);
+```
+
+---
