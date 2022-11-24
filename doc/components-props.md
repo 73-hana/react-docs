@@ -87,3 +87,31 @@ const app = (
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(app);
 ```
+
+---
+
+## コンポーネントを組み合わせる
+
+コンポーネントは、他のコンポーネントを自身の出力（返り値）に含めることができる
+
+これによって、ページの詳細度が低い時も高い時でも、コンポーネントという単一の抽象化の恩恵を受けることができる
+
+```jsx
+import React from "react";
+
+function Welcome(props) {
+  return <p>Hello, {props.name}</p>;
+}
+
+function ComponentProps04() {
+  return (
+    <div>
+      <Welcome name="Nanami" />
+      <Welcome name="Saa" />
+      <Welcome name="John" />
+    </div>
+  );
+}
+
+export default ComponentProps04;
+```
