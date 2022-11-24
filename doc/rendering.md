@@ -21,3 +21,32 @@ root.render(<p>Hello World</p>);
 ```
 
 ---
+
+## レンダーされた要素の更新
+
+React 要素はイミュータブルであるため、一度要素を作成した場合その子要素や属性を変更することは出来ない
+
+UI を更新する方法の 1 つとして、新しい要素を作成して`root.render()`に渡すことができる
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function tick() {
+  const element = (
+    <>
+      <h1>Hello World!</h1>
+      <p>It is {new Date().toLocaleTimeString()}</p>
+    </>
+  );
+  root.render(element);
+}
+
+setInterval(tick, 1000);
+```
+
+しかし、この方法ではないさらに良い方法として、`state`付きコンポーネントを定義することができる
+
+---
