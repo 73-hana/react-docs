@@ -1,10 +1,12 @@
 import React from "react";
-import Test from "./components/Test";
+import Rendering01 from "./components/Rendering01";
 
 function App() {
-  <>
-    <Test />
-  </>
+  return (
+    <>
+      <Rendering01 />
+    </>
+  );
 };
 
 export default App;
