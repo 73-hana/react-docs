@@ -1,9 +1,9 @@
 import ReactDOM from "react-dom";
-import ComponentProps01 from "./components/ComponentProps01";
+import ComponentProps03 from "./components/ComponentProps03";
 
 const app = (
   <>
-    <ComponentProps01 />
+    <ComponentProps03 name="Nanami" />
   </>
 );
 

@@ -49,3 +49,41 @@ export default ComponentProps02;
 props を関数内で受け取るときに、関数コンポーネントは`{props.variable}`だが、クラスコンポーネントは`{this.props.variable}`と記述しなければならない
 
 ---
+
+## コンポーネントのレンダー
+
+React 要素は、DOM のタグを表すものだけではなく、要素はユーザ定義のコンポーネントを表すこともできる
+
+ユーザが定義したコンポーネントを記述するとき、通常の DOM 要素と似たように属性や子要素を記述することができる
+
+この属性や子要素は、単一のオブジェクトとして、それら自身が記述されているコンポーネントに渡される
+
+このオブジェクトのことを`props`という
+
+```jsx
+import React from "react";
+
+function ComponentProps03(props) {
+  return (
+    <>
+      <h1>Hello {props.name}</h1>
+    </>
+  );
+}
+
+export default ComponentProps03;
+```
+
+```jsx
+import ReactDOM from "react-dom";
+import ComponentProps03 from "./components/ComponentProps03";
+
+const app = (
+  <>
+    <ComponentProps03 name="Nanami" />
+  </>
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(app);
+```
