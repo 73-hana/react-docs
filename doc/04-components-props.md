@@ -1,43 +1,35 @@
 # コンポーネントと props
 
-コンポーネントを用いることで、UI を再利用できる部品として独立させることができる。
+コンポーネントを用いることで、UI を再利用できる部品として独立させることができる。コンポーネントは概念的には JS の関数と似ている。
 
-概念的には、コンポーネントは JavaScript の関数と似ている（例えば、引数に似たもので props と呼ばれる入力を受け取り、画面上に表示するべき React 要素を返り値として返す）
+例えば、引数として props を受け取り、React 要素を返り値として渡す。
 
 ## 関数コンポーネントとクラスコンポーネント
 
-コンポーネントを定義するシンプルな方法として、JavaScript の関数が用意されている
+コンポーネントを定義するシンプルな方法は JS の関数を書くことである。
+
+この場合の関数コンポーネントは、データの入った props というオブジェクトを引数として受け取り、React 要素を返す。
 
 ```jsx
 import React from "react";
 
-function ComponentProps01() {
-  return (
-    <>
-      <h1>Hello, {props.name}</h1>
-    </>
-  );
+export default function FunctionComponent(props) {
+  return <h1>Hello, {props.name}</h1>;
 }
-
-export default ComponentProps01;
 ```
 
-データの入った props というオブジェクトを引数として一つ受け取り、React 要素を返す関数である
+```jsx:App.jsx
+<FunctionComponent name="hana"/>
+```
 
-文字通り JavaScript の関数であるため、このようなコンポーネントのことを関数コンポーネントと呼ぶ
-
-別の方法として ES6 のクラスを利用することもできる
+別の方法として ES6 のクラスを利用することもできる。
 
 ```jsx
 import React from "react";
 
-class ComponentProps02 extends React.Component {
+class ClassComponent extends React.Component {
   render() {
-    return (
-      <>
-        <p>Good evening, {this.props.name}</p>
-      </>
-    );
+    return <h1>Hello, {this.props.name}</h1>;
   }
 }
 

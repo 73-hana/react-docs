@@ -64,3 +64,36 @@ export default function JsxAttribute() {
   );
 }
 ```
+
+## 03 レンダリング
+
+ReactDOM は HTML ファイルの中にある任意の要素を 1 つ選び、この要素の中身全てを ReactDOM で管理する。
+
+React 要素をルート DOM ノードにレンダリングする場合は以下のように`createRoot()`の引数に DOM 要素を渡し、`render()`メソッドを呼び出す。
+
+```jsx
+import React from "react";
+import { ReactDOM } from "react";
+
+const rootDOMNode = document.getElementById("root");
+const root = ReactDOM.createRoot(rootDOMNode);
+const element = <h1>Hello, world</h1>;
+root.render(element);
+```
+
+React 要素はイミュータブルであるため、一度要素を作成したらその中身を変更することはできない。変更するためには state を使用するか、`render()`メソッドを再度呼び出す。
+
+```jsx
+import React from "react";
+import { ReactDOM } from "react";
+
+const rootNode = document.getElementById("root");
+const root = ReactDOM.createRoot(rootNode);
+
+function tick() {
+  const element = <p>It is {new Date().toLocaleDateString()}</p>;
+  root.render(element);
+}
+
+setInterval(tick, 1000);
+```
