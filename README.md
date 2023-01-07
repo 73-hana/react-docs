@@ -97,3 +97,57 @@ function tick() {
 
 setInterval(tick, 1000);
 ```
+
+---
+
+## 04 コンポーネントと props
+
+React におけるコンポーネントとは、再利用できる部品として設計された UI を定義する JS 関数またはクラスである。
+
+### コンポーネントの種類
+
+React におけるコンポーネントは 2 種類ある：
+
+- 関数コンポーネント
+
+```jsx
+import React from "react";
+
+export default function FunctionComponent(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+
+```jsx:App.jsx
+<FunctionComponent name="hana"/>
+```
+
+- クラスコンポーネント
+
+```jsx
+import React from "react";
+
+class ClassComponent extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+export default ComponentProps02;
+```
+
+```jsx:App.jsx
+<ClassComponent name="hana"/>
+```
+
+### props
+
+コンポーネントは、JSX 内で DOM 要素のように記述される。なので JSX 内のコンポーネントは属性値や子要素を持つ。
+
+それらは全てオブジェクトとしてコンポーネントに渡される。それを props という。
+
+関数コンポーネントには引数として props が渡され、クラスコンポーネントにはクラスのプロパティとして props が渡されるようになっている。
+
+また、コンポーネントは純関数であり、自身の props を変更するように記述してはいけない。
+
+---

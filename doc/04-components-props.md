@@ -24,6 +24,8 @@ export default function FunctionComponent(props) {
 
 別の方法として ES6 のクラスを利用することもできる。
 
+props を関数内で受け取るときに、関数コンポーネントは`{props.variable}`だが、クラスコンポーネントは`{this.props.variable}`と記述しなければならない。
+
 ```jsx
 import React from "react";
 
@@ -36,43 +38,35 @@ class ClassComponent extends React.Component {
 export default ComponentProps02;
 ```
 
-クラスコンポーネントと関数コンポーネントは、React から見て等価である
-
-props を関数内で受け取るときに、関数コンポーネントは`{props.variable}`だが、クラスコンポーネントは`{this.props.variable}`と記述しなければならない
+クラスコンポーネントと関数コンポーネントは同じクオリティである。
 
 ---
 
 ## コンポーネントのレンダー
 
-React 要素は、DOM のタグを表すものだけではなく、要素はユーザ定義のコンポーネントを表すこともできる
+React 要素は HTML のタグを表すだけでなく、（上で設定したような）ユーザ定義のコンポーネントを表すこともできる。
 
-ユーザが定義したコンポーネントを記述するとき、通常の DOM 要素と似たように属性や子要素を記述することができる
+ユーザ定義のコンポーネントを記述するとき、DOM 要素と同じように扱うことができる。では、DOM 要素のように属性を設定したり、子要素を持たせたりするとどうなるか。それらは単一オブジェクトとして、コンポーネントに渡される。
 
-この属性や子要素は、単一のオブジェクトとして、それら自身が記述されているコンポーネントに渡される
+そのオブジェクトを`props`という。`props`とは、DOM 要素のように記述されたコンポーネントの属性や子要素のことである。
 
-このオブジェクトのことを`props`という
+補足情報として、コンポーネントは常に大文字で始めることが推奨されている。React は小文字で始まるコンポーネントを DOM タグとして扱うように設定されているからである。
 
 ```jsx
 import React from "react";
 
-function ComponentProps03(props) {
-  return (
-    <>
-      <h1>Hello {props.name}</h1>
-    </>
-  );
+export default function ReactComponentProps(props) {
+  return <h1>Hello {props.name}</h1>;
 }
-
-export default ComponentProps03;
 ```
 
 ```jsx
 import ReactDOM from "react-dom";
-import ComponentProps03 from "./components/ComponentProps03";
+import ReactComponentProps from "./path/to/file.jsx";
 
 const app = (
   <>
-    <ComponentProps03 name="Nanami" />
+    <ReactComponentProps name="Nanami" />
   </>
 );
 
@@ -84,60 +78,56 @@ root.render(app);
 
 ## コンポーネントを組み合わせる
 
-コンポーネントは、他のコンポーネントを自身の出力（返り値）に含めることができる
-
-これによって、ページの詳細度が低い時も高い時でも、コンポーネントという単一の抽象化の恩恵を受けることができる
+コンポーネントは、他のコンポーネントを自身の出力（返り値）に含めることができる。これによって、ページが入り組んでいてもシンプルでも、コンポーネントという関心の分離を実現する方法の恩恵を受けることができる。
 
 ```jsx
 import React from "react";
 
-function Welcome(props) {
-  return <p>Hello, {props.name}</p>;
+export default function ReactComponentChild(props) {
+  return <h1>Welcome! {props.name}</h1>;
 }
+```
 
-function ComponentProps04() {
+```jsx
+import React from "react";
+import ReactComponentChild from "./react-component-child";
+
+export default function ReactComponentParent() {
   return (
     <div>
-      <Welcome name="Nanami" />
-      <Welcome name="Saa" />
-      <Welcome name="John" />
+      <ReactComponentChild name="Alex" />
+      <ReactComponentChild name="Bobby" />
     </div>
   );
 }
-
-export default ComponentProps04;
 ```
 
 ---
 
 ## コンポーネントの抽出
 
-コンポーネントが肥大してしまった場合は、恐れずに分割する方が良い
-
-UI の一部が複数回使われている場合、またはその UI 自体が複雑である場合は、そのコンポーネントを分割するのがよい
+コンポーネントが肥大してしまった場合は、恐れずに分割する方が良い。UI の一部が複数回使われている場合、またはその UI 自体が複雑である場合は、そのコンポーネントを分割するのがよい。
 
 ---
 
 ## Props は読み取り専用
 
-関数コンポーネントもクラスコンポーネントも、自身の Props は決して変更してはいけない
+関数コンポーネントもクラスコンポーネントも、自身の Props は決して変更してはいけない。
+
+関数には純粋なものと純粋でないものがある。純関数は引数を変更せず、新しい値を返す必要がある。
 
 ```jsx
+// 純関数
 function sum(a, b) {
   return a + b;
 }
 ```
 
-このような関数は入力されたものを変更せず、新しい値を返す（同じ入力に対して同じ結果が返ってくる）ので純粋であると言える
-
 ```jsx
+// 純関数でない
 function withdraw(account, amount) {
   account.total -= amount;
 }
 ```
 
-先ほどの関数と対照的に、上記の関数は引数を変化するため純粋ではない
-
-全ての React コンポーネントは、自身の Props に対して順関数のようにふるまう必要がある
-
-もちろん UI は動的であり、時間や状態に応じて変化するものであるため、React には state という概念が用意されている
+全ての React コンポーネントは純関数として、自身の Props を変更してはいけない。
