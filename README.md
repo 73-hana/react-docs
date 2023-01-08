@@ -216,3 +216,90 @@ class Clock extends React.Component {
   }
 }
 ```
+
+## イベント処理
+
+イベントハンドラを追加するのは、一般的には DOM 要素の生成後に`addEventListener`を使用する必要はない。その代わりに要素が最初にレンダリングされる際にイベントリスナが設定されるようにする。
+
+React 要素のイベント処理は：
+
+- React 要素のイベントは小文字でなくキャメルケースである
+- JSX ではイベントハンドラとして関数を渡す
+- React 要素では`false`を返してもデフォルトの動作を抑止することができない
+
+関数コンポーネントを用いる場合は以下の通り。
+
+```jsx
+import React from "react";
+
+export default function ReactEvent() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    window.alert("You clicked submit.");
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+クラスコンポーネントを利用する場合は以下の通り。
+
+クラスコンポーネントを使う場合は、イベントハンドラをバインドする必要がある。
+
+```jsx
+class ReactEventClassComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState((prevState) => ({ isToggleOn: ~prevState.isToggleOn }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? "ON" : "OFF"}
+      </button>
+    );
+  }
+}
+
+export default ReactEventClassComponent;
+```
+
+バインドを使いたくない場合は、パブリッククラスフィールド構文もしくはイベントハンドラ内でアロー関数を用いる方法の 2 つがある。
+
+アロー関数を用いる場合、コンポーネントがレンダリングされるたびに新しいイベントハンドラが生成されることになる。よって、一般的にはコンストラクタのバインドか、クラスフィールド構文を利用するのが望ましい。
+
+```jsx
+class ReactEventPublicClass extends React.Component {
+  handleClick = () => {
+    console.log("This is:", this);
+  };
+  render() {
+    return <button onClick={this.handleClick}>Click Me</button>;
+  }
+}
+
+export default ReactEventPublicClass;
+```
+
+```jsx
+class ReactEventArrowFunction extends React.Component {
+  handleClick() {
+    console.log("this is:", this);
+  }
+  render() {
+    return <button onClick={() => this.handleClick()}>Click Me</button>;
+  }
+}
+
+export default ReactEventArrowFunction;
+```

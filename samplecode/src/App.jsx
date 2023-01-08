@@ -11,6 +11,8 @@ import ReactComponentProps from "./04-components-props/react-component-props";
 import ReactComponentParent from "./04-components-props/react-component-parent";
 import ReactStateLocalState from "./05-state-lifecycle/React-state-local-state";
 import ReactStateMountUnmount from "./05-state-lifecycle/react-state-mount-unmount";
+import ReactEvent from "./06-event-handling/react-event";
+import ReactEventClassComponent from "./06-event-handling/react-event-class-component";
 
 export default function App() {
   return (
@@ -29,6 +31,9 @@ export default function App() {
       <p>05 State and Lifecycle</p>
       <ReactStateLocalState />
       <ReactStateMountUnmount />
+      <p>06 event</p>
+      <ReactEvent/>
+      <ReactEventClassComponent />
     </>
   );
 }
