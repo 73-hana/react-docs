@@ -9,6 +9,8 @@ import ReactComponentFunctionComponent from "./04-components-props/react-compone
 import ReactComponentClassComponent from "./04-components-props/react-component-class-component";
 import ReactComponentProps from "./04-components-props/react-component-props";
 import ReactComponentParent from "./04-components-props/react-component-parent";
+import ReactStateLocalState from "./05-state-lifecycle/React-state-local-state";
+import ReactStateMountUnmount from "./05-state-lifecycle/react-state-mount-unmount";
 
 export default function App() {
   return (
@@ -24,6 +26,9 @@ export default function App() {
       <ReactComponentClassComponent name="hana"/>
       <ReactComponentProps name="hana"/>
       <ReactComponentParent/>
+      <p>05 State and Lifecycle</p>
+      <ReactStateLocalState />
+      <ReactStateMountUnmount />
     </>
   );
 }

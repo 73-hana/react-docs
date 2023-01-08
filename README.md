@@ -151,3 +151,68 @@ export default ComponentProps02;
 また、コンポーネントは純関数であり、自身の props を変更するように記述してはいけない。
 
 ---
+
+## 05 state とライフサイクル
+
+state はクラスコンポーネントでしか利用できない。また、state はカプセル化されているため、外部からアクセスすることはできない。
+
+あるコンポーネントが持つ state や props は、他のコンポーネントに渡すことができる。しかし、受け取った props が何由来のものであるかは知ることができない。このデータフローは一般的に「トップダウン」または「単一方向」データフローと呼ばれる。
+
+state を利用する際の注意事項としては以下の通りである：
+
+- state を直接変更してしまうと、再レンダリングが起きなくなってしまう
+- state の更新は非同期に行われる可能性があることを念頭に置く
+- state の変更はマージされるため、データを一つ一つ変更しても問題ない
+
+### クラスにローカルな state を追加する
+
+クラスコンポーネントに state を追加するには、`constructor()`メソッドで設定する。`constructor()`は常に props を引数として親クラスのコンストラクタを呼び出す必要がある。
+
+```jsx
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, World</h1>
+        <p>It is {this.state.date.toLocaleTimeString()}.</p>
+      </div>
+    );
+  }
+}
+```
+
+### クラスにライフサイクルメソッドを追加する
+
+クラスコンポーネントが DOM にレンダリングされるタイミングで実行されるメソッドは`componentDidMount()`であり、クラスコンポーネント由来の DOM が削除されるタイミングで実行されるメソッドは`componentWillUnmount()`である。
+
+```jsx
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    return <p>It is {this.state.date.toLocaleTimeString()}.</p>;
+  }
+}
+```
