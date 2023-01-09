@@ -385,3 +385,26 @@ export default function ReactConditionalTernaryOperatorRendering() {
   );
 }
 ```
+
+## 08 リストと key
+
+配列を要素のリストに変換する場合は`map()`関数を用いる。
+
+その際に、どの要素が変更・追加・削除されたのかを React が認識できるように`key`を用意する必要がある。
+
+```jsx
+import React from "react";
+
+export default function ReactListKeysMap() {
+  const numbers = [1, 2, 3, 4, 5];
+  const listItems = numbers.map((number) => (
+    <li key={number.toString()}>{number}</li>
+  ));
+
+  return <ul>{listItems}</ul>;
+}
+```
+
+Key は兄弟要素間で、それぞれを一意に特定できれば良い。配列のインデックスやデータの ID を利用できるが、要素の並び順が変更される場合にはインデックスを Key として利用することは推奨されていない。
+
+Key は React へのヒントとして利用されるが、コンポーネントの props には渡されない。もし Key の値をコンポーネントにも渡したい場合は、別の名前の props を明示的に用意する必要がある。
