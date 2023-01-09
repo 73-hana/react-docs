@@ -1,3 +1,5 @@
+import React from "react";
+
 class ReactEventPublicClass extends React.Component {
   handleClick = () => {
     console.log("This is:", this);

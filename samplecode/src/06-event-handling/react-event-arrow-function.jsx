@@ -1,3 +1,5 @@
+import React from "react";
+
 class ReactEventArrowFunction extends React.Component {
   handleClick() {
     console.log("this is:", this);

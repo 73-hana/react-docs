@@ -13,6 +13,10 @@ import ReactStateLocalState from "./05-state-lifecycle/React-state-local-state";
 import ReactStateMountUnmount from "./05-state-lifecycle/react-state-mount-unmount";
 import ReactEvent from "./06-event-handling/react-event";
 import ReactEventClassComponent from "./06-event-handling/react-event-class-component";
+import ReactConditionalRendering from "./07-conditional-rendering/react-conditional-rendering";
+import ReactConditionalRenderingVariable from "./07-conditional-rendering/react-conditional-rendering-variable";
+import ReactConditionalRenderingUsingExpression from "./07-conditional-rendering/react-conditional-rendering-using-expression";
+import ReactConditionalTernaryOperatorRendering from "./07-conditional-rendering/react-conditional-ternary-operator-rendering";
 
 export default function App() {
   return (
@@ -34,6 +38,11 @@ export default function App() {
       <p>06 event</p>
       <ReactEvent/>
       <ReactEventClassComponent />
+      <p>07 Conditional Rendering</p>
+      <ReactConditionalRendering />
+      <ReactConditionalRenderingVariable />
+      <ReactConditionalRenderingUsingExpression unreadMessages={["Hi"]} />
+      <ReactConditionalTernaryOperatorRendering />
     </>
   );
 }

@@ -217,7 +217,7 @@ class Clock extends React.Component {
 }
 ```
 
-## イベント処理
+## 06 イベント処理
 
 イベントハンドラを追加するのは、一般的には DOM 要素の生成後に`addEventListener`を使用する必要はない。その代わりに要素が最初にレンダリングされる際にイベントリスナが設定されるようにする。
 
@@ -302,4 +302,86 @@ class ReactEventArrowFunction extends React.Component {
 }
 
 export default ReactEventArrowFunction;
+```
+
+## 07 条件つきレンダリング
+
+React で条件つきレンダリングを行う場合、3 つの方法がある。
+
+- JS の`if`文を利用する（要素変数を作成して`if`文で内容を切り替える）
+
+```jsx
+import React from "react";
+
+export default function ReactConditionalRendering(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <p>Hello Guest!</p>;
+  } else {
+    return <p>Hello User!</p>;
+  }
+}
+```
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+export default function ReactConditionalRenderingVariable() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let button = null;
+
+  function handleLoginClick() {
+    setIsLoggedIn(true);
+  }
+
+  function handleLogoutClick() {
+    setIsLoggedIn(false);
+  }
+
+  if (isLoggedIn) {
+    button = <button onClick={handleLogoutClick}>Log out</button>;
+  } else {
+    button = <button onClick={handleLoginClick}>Log in</button>;
+  }
+
+  return <div>{button}</div>;
+}
+```
+
+- `&&`演算子
+
+```jsx
+import React from "react";
+
+export default function ReactConditionalRenderingUsingExpression(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Messages</h1>
+      {unreadMessages.length > 0 && (
+        <h2>Message: {unreadMessages.length} unread messages.</h2>
+      )}
+    </div>
+  );
+}
+```
+
+- 三項演算子
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+export default function ReactConditionalTernaryOperatorRendering() {
+  const [isLoggedIn, setIsLoggedIn] = useState();
+
+  return (
+    <div>
+      <p>
+        The user is <b>{isLoggedIn ? "Currently" : "not"}</b> logged in.
+      </p>
+    </div>
+  );
+}
 ```
