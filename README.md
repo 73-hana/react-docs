@@ -408,3 +408,90 @@ export default function ReactListKeysMap() {
 Key は兄弟要素間で、それぞれを一意に特定できれば良い。配列のインデックスやデータの ID を利用できるが、要素の並び順が変更される場合にはインデックスを Key として利用することは推奨されていない。
 
 Key は React へのヒントとして利用されるが、コンポーネントの props には渡されない。もし Key の値をコンポーネントにも渡したい場合は、別の名前の props を明示的に用意する必要がある。
+
+## 09 フォーム
+
+HTML 要素は内部に状態を保管している。対して React は state プロパティを用いて状態を管理している。
+
+React の state プロパティを信頼できる唯一の情報源として扱うことで、フォーム要素と React 要素の状態を統合することができる。
+
+具体的には、フォーム要素の value 属性に state プロパティを設定し、change イベントで state プロパティを更新するようにする。
+
+### input 要素
+
+`<input>`要素の`value`属性に React の state プロパティを設定する。また change イベントで state プロパティを更新する。
+
+### textarea 要素
+
+HTML では`<texarea>`要素はテキストを子要素として扱うが、React では子要素の代わりに`value`属性を利用する。
+
+### select 要素
+
+HTML では`<option>`要素に`selected`属性があり、その属性で選択状態を保持している。React では代わりに`<select>`要素の`value`属性に配列を渡すことで選択状態を保持できる。
+
+### 複数の入力の処理
+
+複数の制御されたフォーム要素を処理する必要がある場合、それぞれの入力要素に`name`属性を追加することで、ハンドラ関数の中でそれぞれの要素を一意に特定できる。
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+export default function sampleFunction() {
+  const [value, setValue] = useState({
+    inputValue: "Default",
+    textareaValue: "Default Text",
+    selectValue: null,
+  });
+
+  function handleChange(event) {
+    const name = event.target.name;
+    const targetValue = event.target.value;
+    setValue({
+      [name]: targetValue;
+    });
+  }
+
+  function handleSubmit(event) {
+    alert(`Your Name: ${value.inputValue} Text: ${value.textareaValue} selected: ${value.selectValue}`);
+    event.preventDefault();
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input
+          type="text"
+          name="inputValue"
+          value={value.inputValue}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Essay:
+        <textarea
+          name="textareaValue"
+          value={value.textareaValue}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Pick your favorite flavor:
+        <select
+          name="selectValue"
+          value={selectValue}
+          onChange={handleChange}
+        >
+          <option value="Yes">Yep</option>
+          <option value="Nope">Nope</option>
+        </select>
+      </label>
+    </form>
+  )
+}
+```
+
+### input 属性でファイルを扱う場合
+
+読み取り専用の HTML 要素なので、React の state プロパティで状態管理する必要がない。

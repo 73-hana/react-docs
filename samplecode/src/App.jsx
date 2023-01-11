@@ -18,6 +18,10 @@ import ReactConditionalRenderingVariable from "./07-conditional-rendering/react-
 import ReactConditionalRenderingUsingExpression from "./07-conditional-rendering/react-conditional-rendering-using-expression";
 import ReactConditionalTernaryOperatorRendering from "./07-conditional-rendering/react-conditional-ternary-operator-rendering";
 import ReactListKeysMap from "./08-list-keys/react-list-keys-map";
+import ReactFormControlledComponent from "./09-form/react-form-controlled-component";
+import ReactFormTextarea from "./09-form/react-form-textarea";
+import ReactFormSelect from "./09-form/react-form-select";
+import ReactFormMultiInput from "./09-form/react-form-multi-input";
 
 export default function App() {
   return (
@@ -46,6 +50,11 @@ export default function App() {
       <ReactConditionalTernaryOperatorRendering />
       <p>08 List Keys</p>
       <ReactListKeysMap />
+      <p>09 Form</p>
+      <ReactFormControlledComponent />
+      <ReactFormTextarea />
+      <ReactFormSelect />
+      <ReactFormMultiInput />
     </>
   );
 }
