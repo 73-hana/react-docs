@@ -495,3 +495,38 @@ export default function sampleFunction() {
 ### input 属性でファイルを扱う場合
 
 読み取り専用の HTML 要素なので、React の state プロパティで状態管理する必要がない。
+
+## 11 コンポジション
+
+### 子要素の出力
+
+動的な子要素を持つコンポーネント（サイドバーのように、事前に子要素が決まっていないもの）では、特別な props である`children`を用いることで、受け取った子要素を出力することができる。
+
+また、`children`の代わりに自作の props を用いても良い。
+
+```jsx
+import React from "react";
+
+function HandMadeDiv(props) {
+  return (
+    <div>
+      <div>{props.left}</div>
+      <div>{props.right}</div>
+    </div>
+  );
+}
+
+export default function ReactCompositionInheritanceHandmadeChildren(props) {
+  return (
+    <div>
+      <div>{props.children}</div>
+      <HandMadeDiv left={<span>sample left</span>} />
+      <HandMadeDiv right={<span>sample right</span>} />
+    </div>
+  );
+}
+```
+
+### 特化したコンポーネント
+
+コンポーネントを特殊なケースに対応させたい場合（新年のあいさつやセールの情報など）、汎用的なコンポーネントに props を渡して設定することができる。
