@@ -1,5 +1,8 @@
 # メモ
 
+- [JSX](#02-jsx)
+- [レンダリング](#03-レンダリング)
+
 ## 02 JSX
 
 JSX とは、従来の「技術の分離」型の管理ではなく「関心の分離」型の管理を実現する JS の拡張構文である。
@@ -530,3 +533,73 @@ export default function ReactCompositionInheritanceHandmadeChildren(props) {
 ### 特化したコンポーネント
 
 コンポーネントを特殊なケースに対応させたい場合（新年のあいさつやセールの情報など）、汎用的なコンポーネントに props を渡して設定することができる。
+
+# Hooks
+
+## 02 Hooks 早わかり
+
+フックとは、関数コンポーネントに state やライフサイクルといった React 機能を接続するための関数である。つまり、クラスコンポーネントを使わずに React を使うための機能である。
+
+フックのルールとして：
+
+- 関数コンポーネントのトップレベルのみで呼び出す。
+- React の関数コンポーネントの中でのみ呼び出す。JS 関数内では呼び出さない。
+
+### useState()
+
+関数コンポーネントでローカルな state を使うために呼び出すフック。
+
+`useState()`は state の初期値を引数に持ち、配列の分割代入構文を用いて現在の state の値と、その変数を更新するための関数を定義する。
+
+この関数はコンポーネントの中で呼び出すことができる。
+
+クラスコンポーネントと違い、新しい state と古い state はマージされない。
+
+1 つのコンポーネント内で 2 回以上`useState()`を使うことができる。
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+export default function Hooks02StateHook() {
+  count[(count, setCount)] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click Me</button>
+    </div>
+  );
+}
+```
+
+## useEffect
+
+関数コンポーネント内で副作用を実行するためのフックである。
+
+React における副作用とは、外部データの取得や手動での DOM 操作など、他のコンポーネントに影響するような処理のことである。副作用はレンダリングの最中に実行することはできない。
+
+`useEffect()`の引数にコールバック関数を渡し、そのコールバック関数内で副作用を実行する。
+
+`useEffect()`は自分自身をクリーンアップさせるためのコードを含む関数を返り値に指定することができる。
+
+```jsx
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+
+export default function Hooks02EffectHook() {
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count++)}>Click Me</button>
+    </div>
+  );
+}
+```

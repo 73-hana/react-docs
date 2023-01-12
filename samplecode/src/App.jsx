@@ -24,6 +24,7 @@ import ReactFormSelect from "./09-form/react-form-select";
 import ReactFormMultiInput from "./09-form/react-form-multi-input";
 import ReactCompositionInheritanceChildren from "./11-composition-inheritance/react-composition-inheritance-children";
 import ReactCompositionInheritanceHandmadeChildren from "./11-composition-inheritance/react-composition-inheritance-handmade-children";
+import Hooks from "./Hooks";
 
 export default function App() {
   return (
@@ -60,6 +61,8 @@ export default function App() {
       <p>11 composition and inheritance</p>
       <ReactCompositionInheritanceChildren>sample</ReactCompositionInheritanceChildren>
       <ReactCompositionInheritanceHandmadeChildren />
+      <hr />
+      <Hooks/>
     </>
   );
 }
